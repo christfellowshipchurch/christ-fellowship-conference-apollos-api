@@ -75,13 +75,13 @@ ROCK_MAPPINGS:
       EntityType: ContentChannelItem
     WebsitePagesContentItem:
       EntityType: ContentChannelItem
-      ContentChannelTypeId: [14]
+      ContentChannelTypeId: [13]
     WebsiteContentItem:
       EntityType: ContentChannelItem
-      ContentChannelTypeId: [15]
+      ContentChannelTypeId: [14]
     WebsiteAccordionContentItem:
       EntityType: ContentChannelItem
-      ContentChannelTypeId: [16]
+      ContentChannelTypeId: []
   
   DATAVIEW_CATEGORIES:
     # Id of the category used to store all persona dataviews
@@ -108,8 +108,8 @@ ROCK_MAPPINGS:
   # However, it will not expose the channel itself.
   WEBSITE_CONTENT_CHANNEL_IDS:
     # Content Channels to be used for the Wordpress Migration Website
-    WORDPRESS_MIGRATION:
-      - 23
+    CONFERENCE_2020:
+      - 17
 
 # Default mapping of field types -> ids. There's probably no reason to edit this.
 ROCK_CONSTANTS:
