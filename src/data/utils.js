@@ -18,3 +18,8 @@ export const parseRockKeyValuePairs = (keyValueStr, keyOverride = null, valueOve
       })
     : []
 }
+
+export const parseHexCode = (hex) =>
+  hex.substring(0, 1) === '#'
+    ? hex
+    : `#${hex}`
