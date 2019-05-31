@@ -47,6 +47,8 @@ const resolver = {
             return definedValue.value;
         },
         callsToAction: ({ attributeValues }, args, context) => {
+            console.log({ attributeValues })
+
             const cta = get(attributeValues, 'callsToAction.value', null);
 
             return cta
@@ -57,6 +59,7 @@ const resolver = {
             lowerCase(get(attributeValues, 'openLinksInNewTab.value', 'false')) === 'true'
                 ? '_blank'
                 : '',
+        subtitle: ({ attributeValues }) => get(attributeValues, 'subtitle.value', null)
     }
 }
 
