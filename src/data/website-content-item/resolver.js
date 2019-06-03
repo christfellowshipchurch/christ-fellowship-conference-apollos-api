@@ -59,7 +59,10 @@ const resolver = {
             lowerCase(get(attributeValues, 'openLinksInNewTab.value', 'false')) === 'true'
                 ? '_blank'
                 : '',
-        subtitle: ({ attributeValues }) => get(attributeValues, 'subtitle.value', null)
+        subtitle: ({ attributeValues }) => get(attributeValues, 'subtitle.value', null),
+        buttonColor: ({ attributeValues }) => get(attributeValues, 'buttonColor.value'),
+        backgroundColor: ({ attributeValues }) => get(attributeValues, 'backgroundColor.value')
+
     }
 }
 
