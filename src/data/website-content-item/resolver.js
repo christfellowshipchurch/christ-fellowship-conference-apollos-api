@@ -44,7 +44,7 @@ const resolver = {
             const definedValueGuid = get(attributeValues, 'imageRatio.value', '');
             const definedValue = await context.dataSources.DefinedValue.getDefinedValueByIdentifier(definedValueGuid);
 
-            return definedValue.value;
+            return get(definedValue, 'value', '');
         },
         callsToAction: ({ attributeValues }, args, context) => {
             console.log({ attributeValues })
@@ -60,8 +60,8 @@ const resolver = {
                 ? '_blank'
                 : '',
         subtitle: ({ attributeValues }) => get(attributeValues, 'subtitle.value', null),
-        buttonColor: ({ attributeValues }) => get(attributeValues, 'buttonColor.value'),
-        backgroundColor: ({ attributeValues }) => get(attributeValues, 'backgroundColor.value')
+        buttonColor: ({ attributeValues }) => get(attributeValues, 'buttonColor.value', null),
+        backgroundColor: ({ attributeValues }) => get(attributeValues, 'backgroundColor.value', null)
 
     }
 }
