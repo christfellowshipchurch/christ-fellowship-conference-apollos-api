@@ -107,9 +107,8 @@ ROCK_MAPPINGS:
   # Apollos will pull content items from these channels and expose them on a website
   # However, it will not expose the channel itself.
   WEBSITE_CONTENT_CHANNEL_IDS:
-    # Content Channels to be used for the Wordpress Migration Website
-    CONFERENCE_2020:
-      - 17
+    # Content Channel used to house the pages for each website
+    CONFERENCE_2020: 17
 
 # Default mapping of field types -> ids. There's probably no reason to edit this.
 ROCK_CONSTANTS:

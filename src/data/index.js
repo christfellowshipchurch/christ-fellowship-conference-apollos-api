@@ -33,6 +33,7 @@ import * as OneSignalWithRock from './oneSignalWithRock';
 import * as WebsitePagesContentItem from './website-pages-content-item';
 import * as WebsiteContentItem from './website-content-item';
 import * as WebsiteAccordionContentItem from './website-accordion-content-item';
+import * as WebsiteNavigation from './website-navigation';
 import * as DefinedValue from './defined-value';
 
 const data = {
@@ -65,6 +66,7 @@ const data = {
   WebsitePagesContentItem,
   WebsiteContentItem,
   WebsiteAccordionContentItem,
+  WebsiteNavigation
 };
 
 const {

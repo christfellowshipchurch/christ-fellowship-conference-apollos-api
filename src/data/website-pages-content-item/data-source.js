@@ -46,10 +46,6 @@ export default class WebsitePagesContentItem extends ContentItem.dataSource {
                     ).join(' or ')}) and (Id eq ${contentChannelItemId})`
                 )
                 .first();
-
-            // if (websiteContentChannelItems) {
-            //     return first(websiteContentChannelItems);
-            // }
         }
 
         return null;
