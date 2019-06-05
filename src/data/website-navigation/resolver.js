@@ -2,7 +2,7 @@ import {
     createGlobalId,
 } from '@apollosproject/server-core';
 import {
-    get
+    get, first
 } from 'lodash'
 import { parseRockKeyValuePairs } from '../utils'
 
@@ -14,11 +14,18 @@ const resolver = {
     WebsiteNavigation: {
         id: ({ id }, args, context, { parentType }) =>
             createGlobalId(id, parentType.name),
-        navigationLinks: ({ attributeValues }) => {
-            const callsToAction = get(attributeValues, 'navigationLinks.value', '')
-
-            return parseRockKeyValuePairs(callsToAction, 'call', 'action')
-        }
+        navigationLinks: ({ attributeValues }) => (
+            parseRockKeyValuePairs(
+                get(attributeValues, 'navigationLinks.value', ''),
+                'call',
+                'action')
+        ),
+        quickAction: ({ attributeValues }) => (
+            first(parseRockKeyValuePairs(
+                get(attributeValues, 'quickAction.value', ''),
+                'call',
+                'action'))
+        ),
     }
 }
 

@@ -8,5 +8,6 @@ export default gql`
     type WebsiteNavigation implements Node {
         id: ID!
         navigationLinks: [CallToAction]
+        quickAction: CallToAction
     }
 `;

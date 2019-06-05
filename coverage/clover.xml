@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1559671131651" clover="3.2.0">
-  <project timestamp="1559671131652" name="All files">
-    <metrics statements="113" coveredstatements="42" conditionals="46" coveredconditionals="27" methods="45" coveredmethods="13" elements="204" coveredelements="82" complexity="0" loc="113" ncloc="113" packages="8" files="29" classes="29"/>
+<coverage generated="1559753666137" clover="3.2.0">
+  <project timestamp="1559753666137" name="All files">
+    <metrics statements="113" coveredstatements="42" conditionals="46" coveredconditionals="27" methods="46" coveredmethods="13" elements="205" coveredelements="82" complexity="0" loc="113" ncloc="113" packages="8" files="29" classes="29"/>
     <package name="src">
       <metrics statements="15" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="config.js" path="/Users/caleb.panza/Development/API/christ-fellowship-conference-apollos-api/src/config.js">
@@ -170,7 +170,7 @@
       </file>
     </package>
     <package name="src.data.website-navigation">
-      <metrics statements="10" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="1"/>
+      <metrics statements="10" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="1"/>
       <file name="data-source.js" path="/Users/caleb.panza/Development/API/christ-fellowship-conference-apollos-api/src/data/website-navigation/data-source.js">
         <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="7" count="1" type="stmt"/>
@@ -183,12 +183,12 @@
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
       <file name="resolver.js" path="/Users/caleb.panza/Development/API/christ-fellowship-conference-apollos-api/src/data/website-navigation/resolver.js">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
       <file name="schema.js" path="/Users/caleb.panza/Development/API/christ-fellowship-conference-apollos-api/src/data/website-navigation/schema.js">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
