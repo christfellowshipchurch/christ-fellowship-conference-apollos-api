@@ -10,5 +10,9 @@ export default gql`
         navigationLinks: [CallToAction]
         quickAction: CallToAction
         images: [ImageMedia]
-    }
+        instagramUrl: String
+        twitterUrl: String
+        facebookUrl: String
+        linkstoPages: CallToAction
+    } 
 `;

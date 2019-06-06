@@ -28,7 +28,23 @@ const resolver = {
                 'action'))
         ),
         images: (root, args, { dataSources: { ContentItem } }) =>
-            ContentItem.getImages(root)
+            ContentItem.getImages(root),
+
+        instagramUrl: ({ attributeValues }) => (
+            get(attributeValues, 'instagramUrl.value', null)
+        ),
+        twitterUrl: ({ attributeValues }) => (
+            get(attributeValues, 'twitterUrl.value', null)
+        ),
+        facebookUrl: ({ attributeValues }) => (
+            get(attributeValues, 'facebookUrl.value', null)
+        ),
+        linkstoPages: ({ attributeValues }) => (
+            first(parseRockKeyValuePairs(
+                get(attributeValues, 'linkstoPages.value', ''),
+                'call',
+                'action'))
+        )
     }
 }
 
