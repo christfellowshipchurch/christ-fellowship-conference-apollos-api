@@ -4,6 +4,7 @@ import {
 import {
     get, first
 } from 'lodash'
+
 import { parseRockKeyValuePairs } from '../utils'
 
 const resolver = {
@@ -26,6 +27,8 @@ const resolver = {
                 'call',
                 'action'))
         ),
+        images: (root, args, { dataSources: { ContentItem } }) =>
+            ContentItem.getImages(root)
     }
 }
 

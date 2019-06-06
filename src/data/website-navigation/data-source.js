@@ -1,12 +1,12 @@
 import { ContentChannel } from '@apollosproject/data-connector-rock';
 import ApollosConfig from '@apollosproject/config';
 import {
-    get, toLower, isEmpty
+    get
 } from 'lodash';
 
 const { ROCK_MAPPINGS } = ApollosConfig;
 
-export default class WebsitePagesContentItem extends ContentChannel.dataSource {
+export default class WebsiteNavigation extends ContentChannel.dataSource {
     expanded = true
 
     getWebsiteNavigation = async (website) => {

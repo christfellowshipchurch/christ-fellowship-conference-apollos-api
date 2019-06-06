@@ -9,5 +9,6 @@ export default gql`
         id: ID!
         navigationLinks: [CallToAction]
         quickAction: CallToAction
+        images: [ImageMedia]
     }
 `;
