@@ -18,6 +18,8 @@ export default class DefinedValue extends RockApolloDataSource {
     }
 
     getDefinedValueByIdentifier = (id) => {
+        if (!id || id === '') return null
+
         const type = this.getIdentifierType(id);
 
         return type.query

@@ -37,13 +37,13 @@ const resolver = {
             const layoutId = get(attributeValues, 'groupLayout.value', '')
             const definedValue = await dataSources.DefinedValue.getDefinedValueByIdentifier(layoutId)
 
-            return definedValue.value
+            return get(definedValue, 'value', null)
         },
         accordionType: async ({ attributeValues }, args, { dataSources }) => {
             const typeId = get(attributeValues, 'accordionType.value', '')
             const definedValue = await dataSources.DefinedValue.getDefinedValueByIdentifier(typeId)
 
-            return definedValue.value
+            return get(definedValue, 'value', null)
         },
         backgroundColor: ({ attributeValues }) => {
             const value = get(attributeValues, 'backgroundColor.value', null)
