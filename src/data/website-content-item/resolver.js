@@ -21,6 +21,7 @@ const resolver = {
                 ? title
                 : titleOverride;
         },
+        htmlContent: ({ content }) => content,
         videos: (root, args, { dataSources: { ContentItem } }) => {
             const videos = ContentItem.getVideos(root);
 
