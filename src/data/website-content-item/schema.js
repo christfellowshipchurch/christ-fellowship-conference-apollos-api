@@ -35,5 +35,6 @@ export default gql`
         subtitle: String
         buttonColor: String
         backgroundColor: String
+        gridImageLink: String
     }
 `;

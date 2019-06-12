@@ -49,7 +49,7 @@ const resolver = {
             const value = get(attributeValues, 'backgroundColor.value', null)
 
             return value ? parseHexCode(value) : null
-        },
+        }
     }
 }
 

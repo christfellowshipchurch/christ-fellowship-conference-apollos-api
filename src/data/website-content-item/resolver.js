@@ -62,8 +62,8 @@ const resolver = {
                 : '',
         subtitle: ({ attributeValues }) => get(attributeValues, 'subtitle.value', null),
         buttonColor: ({ attributeValues }) => get(attributeValues, 'buttonColor.value', null),
-        backgroundColor: ({ attributeValues }) => get(attributeValues, 'backgroundColor.value', '#fff')
-
+        backgroundColor: ({ attributeValues }) => get(attributeValues, 'backgroundColor.value', '#fff'),
+        gridImageLink: ({ attributeValues }) => get(attributeValues, 'gridImageLink.value', null)
     }
 }
 
