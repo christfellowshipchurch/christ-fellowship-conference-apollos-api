@@ -65,7 +65,7 @@ const data = {
   // Local Content Items
   WebsitePagesContentItem,
   WebsiteContentItem,
-  WebsiteNavigation
+  WebsiteNavigation,
   WebsiteGroupContentItem
 };
 
