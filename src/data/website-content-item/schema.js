@@ -33,5 +33,7 @@ export default gql`
         callsToAction: [CallToAction]
         target: String
         subtitle: String
+        buttonColor: String
+        backgroundColor: String
     }
 `;

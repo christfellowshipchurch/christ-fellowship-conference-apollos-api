@@ -32,8 +32,8 @@ import * as OneSignalWithRock from './oneSignalWithRock';
 // Localized Modules
 import * as WebsitePagesContentItem from './website-pages-content-item';
 import * as WebsiteContentItem from './website-content-item';
-import * as WebsiteAccordionContentItem from './website-accordion-content-item';
 import * as WebsiteNavigation from './website-navigation';
+import * as WebsiteGroupContentItem from './website-group-content-item';
 import * as DefinedValue from './defined-value';
 
 const data = {
@@ -65,8 +65,8 @@ const data = {
   // Local Content Items
   WebsitePagesContentItem,
   WebsiteContentItem,
-  WebsiteAccordionContentItem,
   WebsiteNavigation
+  WebsiteGroupContentItem
 };
 
 const {
