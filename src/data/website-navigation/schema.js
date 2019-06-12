@@ -13,6 +13,6 @@ export default gql`
         instagramUrl: String
         twitterUrl: String
         facebookUrl: String
-        linkstoPages: CallToAction
+        footerLinks: [CallToAction]
     } 
 `;

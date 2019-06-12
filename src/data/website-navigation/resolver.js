@@ -39,11 +39,11 @@ const resolver = {
         facebookUrl: ({ attributeValues }) => (
             get(attributeValues, 'facebookUrl.value', null)
         ),
-        linkstoPages: ({ attributeValues }) => (
-            first(parseRockKeyValuePairs(
-                get(attributeValues, 'linkstoPages.value', ''),
+        footerLinks: ({ attributeValues }) => (
+            parseRockKeyValuePairs(
+                get(attributeValues, 'footerLinks.value', ''),
                 'call',
-                'action'))
+                'action')
         )
     }
 }
