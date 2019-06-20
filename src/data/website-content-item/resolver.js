@@ -48,7 +48,6 @@ const resolver = {
             return get(definedValue, 'value', '');
         },
         callsToAction: ({ attributeValues }, args, context) => {
-            console.log({ attributeValues })
 
             const cta = get(attributeValues, 'callsToAction.value', null);
 
@@ -61,10 +60,12 @@ const resolver = {
                 ? '_blank'
                 : '',
         subtitle: ({ attributeValues }) => get(attributeValues, 'subtitle.value', null),
-        buttonColor: ({ attributeValues }) => get(attributeValues, 'buttonColor.value', null),
+        buttonColor: ({ attributeValues }) => {
+            const value = get(attributeValues, 'buttonColor.value', null)
+            return value ? parseHexCode(value) : null
+        },
         backgroundColor: ({ attributeValues }) => {
-            const value = get(attributeValues, 'backgroundColor.value', null)
-            
+            const value = get(attributeValues, 'backgroundColor.value', null)           
             return value ? parseHexCode(value) : null          
         },
         gridImageLink: ({ attributeValues }) => get(attributeValues, 'gridImageLink.value', null)
