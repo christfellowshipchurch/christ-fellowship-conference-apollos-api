@@ -68,7 +68,8 @@ const resolver = {
             const value = get(attributeValues, 'backgroundColor.value', null)           
             return value ? parseHexCode(value) : null          
         },
-        gridImageLink: ({ attributeValues }) => get(attributeValues, 'gridImageLink.value', null)
+        gridImageLink: ({ attributeValues }) => get(attributeValues, 'gridImageLink.value', null),
+        openLinksInNewTab: ({ attributeValues }) => get(attributeValues, 'openLinksInNewTab.value', null)
     }
 }
 

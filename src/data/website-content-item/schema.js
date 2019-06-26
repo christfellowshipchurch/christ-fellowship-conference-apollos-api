@@ -36,5 +36,6 @@ export default gql`
         buttonColor: String
         backgroundColor: String
         gridImageLink: String
+        openLinksInNewTab: String
     }
 `;
