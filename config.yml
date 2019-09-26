@@ -19,9 +19,19 @@ ROCK:
   FILE_URL: ${ROCK_API}/GetFile.ashx
   # This should match the timezone of the Rock server
   TIMEZONE: 'America/New_York'
+  USE_PLUGIN: true
 ONE_SIGNAL:
   APP_ID: b6e75a77-003f-4466-95ca-82cc5cdc407b
   REST_KEY: ${ONE_SIGNAL_REST_KEY}
+CHURCH_ONLINE:
+  URL: https://apollos.churchonline.org/api/v1/
+  MEDIA_URLS: []
+  WEB_VIEW_URL: https://apollos.churchonline.org/
+ALGOLIA:
+  APPLICATION_ID: ${ALGOLIA_APP_ID}
+  API_KEY: ${ALGOLIA_API_KEY}
+  # TODO: should we support multiple indices? how?
+  SEARCH_INDEX: test_ContentItems
 TWILIO:
   ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
   AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
@@ -73,6 +83,9 @@ ROCK_MAPPINGS:
       EntityType: ContentChannelItem
     ContentItem:
       EntityType: ContentChannelItem
+    WeekendContentItem:
+      ContentChannelId: [5]
+      EntityType: ContentChannelItem
     WebsitePagesContentItem:
       EntityType: ContentChannelItem
       ContentChannelTypeId: [13]
@@ -96,6 +109,7 @@ ROCK_MAPPINGS:
     - 8
   # Apollos will pull content items from these channels and expose them on the user feed
   # However, it will not expose the channel itself.
+  # These channels are also pulled when indexing searchable content.
   FEED_CONTENT_CHANNEL_IDS:
     - 1
     - 2
@@ -109,6 +123,28 @@ ROCK_MAPPINGS:
   WEBSITE_CONTENT_CHANNEL_IDS:
     # Content Channel used to house the pages for each website
     CONFERENCE_2020: 17
+
+  CAMPAIGN_CHANNEL_IDS:
+    - 11
+
+  SERMON_CHANNEL_ID: 5
+
+  SERVING_GROUP_TYPE_ID: 23
+  COMMUNITY_GROUP_TYPE_ID: 25
+  FAMILY_GROUP_TYPE_ID: 10
+
+HOME_FEATURES:
+  - title: FOR YOU
+    algorithms: [SERMON_CHILDREN, PERSONA_FEED]
+    subtitle: Explore what God calls you to today
+  - title: BULLETIN
+    subtitle: What's happening at apollos?
+    algorithms:
+      - type: CONTENT_CHANNEL
+        arguments:
+          contentChannelId: 13
+      - type: UPCOMING_EVENTS
+
 
 # Default mapping of field types -> ids. There's probably no reason to edit this.
 ROCK_CONSTANTS:

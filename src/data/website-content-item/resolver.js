@@ -1,5 +1,5 @@
 import { ContentItem, Utils } from '@apollosproject/data-connector-rock'
-import { schemaMerge } from '@apollosproject/server-core'
+import { resolverMerge } from '@apollosproject/server-core'
 import ApollosConfig from '@apollosproject/config'
 import {
     get, lowerCase
@@ -65,12 +65,12 @@ const resolver = {
             return value ? parseHexCode(value) : null
         },
         backgroundColor: ({ attributeValues }) => {
-            const value = get(attributeValues, 'backgroundColor.value', null)           
-            return value ? parseHexCode(value) : null          
+            const value = get(attributeValues, 'backgroundColor.value', null)
+            return value ? parseHexCode(value) : null
         },
         gridImageLink: ({ attributeValues }) => get(attributeValues, 'gridImageLink.value', null),
         openLinksInNewTab: ({ attributeValues }) => get(attributeValues, 'openLinksInNewTab.value', null)
     }
 }
 
-export default schemaMerge(resolver, ContentItem);
+export default resolverMerge(resolver, ContentItem);

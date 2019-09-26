@@ -7,6 +7,7 @@ import * as Scripture from '@apollosproject/data-connector-bible';
 import * as LiveStream from '@apollosproject/data-connector-church-online';
 import * as Cloudinary from '@apollosproject/data-connector-cloudinary';
 import * as OneSignal from '@apollosproject/data-connector-onesignal';
+import * as Search from '@apollosproject/data-connector-algolia-search';
 import * as Pass from '@apollosproject/data-connector-passes';
 import * as Sms from '@apollosproject/data-connector-twilio';
 import {
@@ -22,6 +23,10 @@ import {
   Template,
   AuthSms,
   Campus,
+  Group,
+  BinaryFiles,
+  Features,
+  Events,
 } from '@apollosproject/data-connector-rock';
 import * as Theme from './theme';
 
@@ -56,8 +61,13 @@ const data = {
   PersonalDevice,
   OneSignalWithRock,
   Pass,
+  // Search,
   Template,
   Campus,
+  Features,
+  Group,
+  BinaryFiles,
+  Events,
 
   // Local Types
   DefinedValue,
@@ -75,9 +85,17 @@ const {
   schema,
   context,
   applyServerMiddleware,
+  setupJobs,
 } = createApolloServerConfig(data);
 
-export { dataSources, resolvers, schema, context, applyServerMiddleware };
+export {
+  dataSources,
+  resolvers,
+  schema,
+  context,
+  applyServerMiddleware,
+  setupJobs,
+};
 
 // the upload Scalar is added
 export const testSchema = [

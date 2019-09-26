@@ -1,5 +1,5 @@
 import { ContentItem, Utils } from '@apollosproject/data-connector-rock'
-import { schemaMerge } from '@apollosproject/server-core'
+import { resolverMerge } from '@apollosproject/server-core'
 import ApollosConfig from '@apollosproject/config'
 import {
     get, lowerCase
@@ -53,4 +53,4 @@ const resolver = {
     }
 }
 
-export default schemaMerge(resolver, ContentItem);
+export default resolverMerge(resolver, ContentItem);
