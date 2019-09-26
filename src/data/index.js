@@ -22,6 +22,7 @@ import {
   Template,
   AuthSms,
   Campus,
+  Features,
 } from '@apollosproject/data-connector-rock';
 import * as Theme from './theme';
 
@@ -58,6 +59,7 @@ const data = {
   Pass,
   Template,
   Campus,
+  Features,
 
   // Local Types
   DefinedValue,
