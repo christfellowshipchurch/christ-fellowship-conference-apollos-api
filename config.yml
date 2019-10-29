@@ -95,6 +95,10 @@ ROCK_MAPPINGS:
     WebsiteGroupContentItem:
       EntityType: ContentChannelItem
       ContentChannelTypeId: [15]
+
+  BREAKOUTS:
+    CATEGORIES: 86
+    SESSIONS: 85
   
   DATAVIEW_CATEGORIES:
     # Id of the category used to store all persona dataviews

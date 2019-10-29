@@ -40,6 +40,9 @@ import * as WebsiteContentItem from './website-content-item';
 import * as WebsiteNavigation from './website-navigation';
 import * as WebsiteGroupContentItem from './website-group-content-item';
 import * as DefinedValue from './defined-value';
+import * as DefinedValueList from './defined-value-list';
+
+import * as Breakout from './breakout';
 
 const data = {
   Followings,
@@ -71,12 +74,16 @@ const data = {
 
   // Local Types
   DefinedValue,
+  DefinedValueList,
 
   // Local Content Items
   WebsitePagesContentItem,
   WebsiteContentItem,
   WebsiteNavigation,
-  WebsiteGroupContentItem
+  WebsiteGroupContentItem,
+
+  // Conference Specific
+  Breakout,
 };
 
 const {
