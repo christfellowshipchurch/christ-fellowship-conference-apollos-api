@@ -2,7 +2,8 @@ import { createGlobalId } from '@apollosproject/server-core';
 
 const resolver = {
     Query: {
-        getDefinedValueByIdentifier: (root, { identifier }, { dataSources }) => dataSources.DefinedValue.getDefinedValueByIdentifier(identifier)
+        getDefinedValueByIdentifier: (root, { identifier }, { dataSources }) =>
+            dataSources.DefinedValue.getDefinedValueByIdentifier(identifier),
     },
     DefinedValue: {
         id: ({ id }, args, context, { parentType }) =>
