@@ -62,9 +62,9 @@ CLOUDINARY:
 ROCK_MAPPINGS:
   INTERACTIONS:
     # Name of the InteractionChannel that will be created
-    CHANNEL_NAME: Apollos App
+    CHANNEL_NAME: Christ Fellowship Conference App
     # Name of the InteractionComponent that will be created for Content Items
-    COMPONENT_NAME: Apollos Content Item
+    COMPONENT_NAME: Christ Fellowship Conference App Item
     # 512 is "Mobile App"
     CHANNEL_MEDIUM_TYPE_ID: 512
 
@@ -95,10 +95,20 @@ ROCK_MAPPINGS:
     WebsiteGroupContentItem:
       EntityType: ContentChannelItem
       ContentChannelTypeId: [15]
+    EventTicketContentItem:
+      EntityType: ContentChannelItem
+    ConferenceSpeakerContentItem:
+      EntityType: ContentChannelItem
+    ConferenceScheduleContentItem:
+      EntityType: ContentChannelItem
+      ContentChannelTypeId: [12]
+    ConferenceGroupContentItem:
+      EntityType: Group
 
   BREAKOUTS:
     CATEGORIES: 86
     SESSIONS: 85
+    TIMES: 84
   
   DATAVIEW_CATEGORIES:
     # Id of the category used to store all persona dataviews
@@ -106,27 +116,31 @@ ROCK_MAPPINGS:
 
   # Apollos will pull these content channels and expose them in the app on the discover screen.
   DISCOVER_CONTENT_CHANNEL_IDS:
-    - 2
-    - 3
-    - 4
-    - 6
-    - 8
+    - 12
+
+
   # Apollos will pull content items from these channels and expose them on the user feed
   # However, it will not expose the channel itself.
   # These channels are also pulled when indexing searchable content.
   FEED_CONTENT_CHANNEL_IDS:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 8
+    - 21
+    # - 12
+
+  SPEAKER_CONTENT_CHANNEL_IDS:
+    - 20
+
+  SCHEDULE_CONTENT_CHANNEL_IDS:
+    - 22
+
   # Apollos will pull content items from these channels and expose them on a website
   # However, it will not expose the channel itself.
   WEBSITE_CONTENT_CHANNEL_IDS:
     # Content Channel used to house the pages for each website
     CONFERENCE_2020: 17
+
+  NAVIGATION_CONTENT_CHANNEL_IDS:
+    MobileTabs:
+      - 13
 
   CAMPAIGN_CHANNEL_IDS:
     - 11
@@ -136,6 +150,7 @@ ROCK_MAPPINGS:
   SERVING_GROUP_TYPE_ID: 23
   COMMUNITY_GROUP_TYPE_ID: 25
   FAMILY_GROUP_TYPE_ID: 10
+  BREAKOUT_GROUP_TYPE_ID: 46
 
 HOME_FEATURES:
   - title: FOR YOU

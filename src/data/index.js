@@ -14,19 +14,15 @@ import {
   Followings,
   Interactions,
   RockConstants,
-  Person,
-  ContentItem,
-  ContentChannel,
   Sharable,
-  Auth,
   PersonalDevice,
   Template,
   AuthSms,
   Campus,
-  Group,
   BinaryFiles,
   Features,
   Events,
+  Family,
 } from '@apollosproject/data-connector-rock';
 import * as Theme from './theme';
 
@@ -43,16 +39,27 @@ import * as DefinedValue from './defined-value';
 import * as DefinedValueList from './defined-value-list';
 
 import * as Breakout from './breakout';
+import * as ContentChannel from './content-channels';
+import * as Auth from './extended-auth';
+import * as AuthenticatedUser from './authenticated-user';
+import * as ContentItem from './content-items';
+import * as EventTicketContentItem from './event-ticket';
+import * as ConferenceSpeakerContentItem from './conference-speaker';
+import * as ConferenceGroupContentItem from './conference-group';
+import * as Person from './rock-people';
+import * as Group from './rock-groups';
+import * as AppNavigationContentItem from './app-navigation';
+import * as ConferenceScheduleContentItem from './conference-schedule';
 
 const data = {
   Followings,
   ContentChannel,
   ContentItem,
   Person,
-  // Cloudinary,
+  Cloudinary,
   Auth,
-  AuthSms,
-  Sms,
+  // AuthSms,
+  // Sms,
   LiveStream,
   Theme,
   Scripture,
@@ -84,6 +91,18 @@ const data = {
 
   // Conference Specific
   Breakout,
+
+  // Family,
+  // UniversalContentItem: ContentItem, // alias
+  // DevotionalContentItem: ContentItem, // alias
+  // ContentSeriesContentItem: ContentItem, // alias
+  // MediaContentItem: ContentItem, // alias
+  EventTicketContentItem,
+  ConferenceSpeakerContentItem,
+  ConferenceGroupContentItem,
+  AppNavigationContentItem,
+  ConferenceScheduleContentItem,
+  // AuthenticatedUser,
 };
 
 const {
