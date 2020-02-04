@@ -1,7 +1,9 @@
 import { createGlobalId } from '@apollosproject/server-core'
 import ApollosConfig from '@apollosproject/config'
-import { get } from 'lodash'
+import { get, sortBy, split } from 'lodash'
 import sanitizeHtml from 'sanitize-html'
+
+import { resolver as definedValueResolver } from '../defined-value'
 
 const resolver = {
     Query: {
@@ -13,17 +15,104 @@ const resolver = {
             dataSources.Breakout.getAllSessions(),
         getBreakoutSessionsByCategory: (root, { category }, { dataSources }) =>
             dataSources.Breakout.getSessionsByCategory({ category }),
+        breakoutFilters: async (root, { filter }, { dataSources }) => {
+            const { definedValues } = await dataSources.DefinedValueList.getByIdentifier(
+                get(ApollosConfig, `ROCK_MAPPINGS.BREAKOUTS.${filter}`, '')
+            )
+
+            return sortBy(definedValues, 'order')
+        },
+        breakouts: async (root, { category, time }, { dataSources }) => {
+            const sessions = await dataSources.Breakout.getByFilters({
+                categories: [category],
+                times: [time],
+            })
+
+            return sessions.map(({ value, ...props }) => ({ title: value, ...props }))
+        },
+        myBreakouts: async (root, args, { dataSources }) =>
+            dataSources.Breakout.forCurrentUser(),
+        breakoutSignUpUrl: () => "https://rock.christfellowshipconference.com/2020breakouts"
     },
-    BreakoutSession: {
+    Breakout: {
         id: ({ id }, args, context, { parentType }) =>
             createGlobalId(id, parentType.name),
-        title: ({ title }) => title,
+        title: ({ title, value }) => title || value,
         description: ({ description }) =>
             sanitizeHtml(description, {
                 allowedTags: [],
             }),
+        htmlContent: ({ description }) =>
+            sanitizeHtml(description),
         tag: ({ tag }) => tag,
-        parent: ({ parent }) => parent
+        parent: ({ parent }) => parent,
+        icon: async ({ attributeValues }, args, { dataSources }) => {
+            const categoryGuid = get(attributeValues, 'ministryArea.value', '')
+
+            if (categoryGuid !== '') {
+                const category = await dataSources.DefinedValue.getByIdentifier(categoryGuid)
+                return get(category, 'attributeValues.icon.value', '')
+            }
+
+            return {}
+        },
+        theme: async ({ attributeValues }, args, { dataSources }) => {
+            const categoryGuid = get(attributeValues, 'ministryArea.value', '')
+
+            if (categoryGuid !== '') {
+                const defaultColor = '#0F4D81'
+                const category = await dataSources.DefinedValue.getByIdentifier(categoryGuid)
+                const primary = get(category, 'attributeValues.color.value', defaultColor)
+
+                return {
+                    type: "LIGHT",
+                    colors: {
+                        primary: primary !== "" ? primary : defaultColor
+                    }
+                }
+            }
+
+            return {}
+        },
+        categories: ({ attributeValues }, args, { dataSources }) => {
+            const categoryGuid = get(attributeValues, 'ministryArea.value', '')
+
+            return [dataSources.DefinedValue.getByIdentifier(categoryGuid)]
+        },
+        times: ({ attributeValues }, args, { dataSources }) => {
+            const timeGuids = get(attributeValues, 'breakoutSessions.value', '')
+
+            return split(timeGuids, ',')
+                .map(n => dataSources.DefinedValue.getByIdentifier(n))
+        },
+        summary: async ({ attributeValues }, args, { dataSources }) => {
+            const topicIdentifierGuid = get(attributeValues, 'topicIdentifier.value', '')
+
+            if (!!topicIdentifierGuid && topicIdentifierGuid !== '') {
+                const definedValue = await dataSources.DefinedValue.getByIdentifier(topicIdentifierGuid)
+
+                return definedValue.value
+            }
+
+            return ''
+        },
+        location: () => ''
+    },
+    BreakoutFilter: {
+        ...definedValueResolver.DefinedValue,
+        icon: async ({ attributeValues }) =>
+            get(attributeValues, 'icon.value', ''),
+        theme: async ({ attributeValues }, args, { dataSources }) => {
+            const defaultColor = '#0F4D81'
+            const primary = get(attributeValues, 'color.value', defaultColor)
+
+            return {
+                type: "LIGHT",
+                colors: {
+                    primary: primary !== "" ? primary : defaultColor
+                }
+            }
+        },
     }
 }
 
