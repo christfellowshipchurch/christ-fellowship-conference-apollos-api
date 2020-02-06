@@ -56,10 +56,14 @@ export default {
       typeof attributeValues.church === 'object'
         ? attributeValues.church.value
         : '',
-    jobTitle: ({ attributeValues }) =>
-      typeof attributeValues.jobTitle === 'object'
+    jobTitle: async ({ attributeValues }, args, { dataSources }) => {
+      // Return this for Senior Pastor users
+      if (await dataSources.Auth.isSPX()) return "Senior Pastor Experience"
+
+      return typeof attributeValues.jobTitle === 'object'
         ? attributeValues.jobTitle.value
-        : '',
+        : ''
+    },
     department: ({ attributeValues }) =>
       typeof attributeValues.ministryDepartment === 'object'
         ? attributeValues.ministryDepartment.value

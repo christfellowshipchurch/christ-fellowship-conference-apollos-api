@@ -1,5 +1,6 @@
 import { Auth } from '@apollosproject/data-connector-rock';
 import { AuthenticationError } from 'apollo-server';
+import { get, split } from 'lodash'
 import moment from 'moment';
 
 export default class ExtendedAuth extends Auth.dataSource {
@@ -84,4 +85,15 @@ export default class ExtendedAuth extends Auth.dataSource {
     }
     throw new AuthenticationError('Must be logged in');
   };
+
+  isSPX = async () => {
+    try {
+      const currentPerson = await this.getCurrentPerson()
+      const ticketTypes = split(get(currentPerson, 'attributeValues.2020TicketType.value', ''), '|')
+
+      return ticketTypes.includes('SPX')
+    } catch {
+      return false
+    }
+  }
 }

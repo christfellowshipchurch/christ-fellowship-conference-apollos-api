@@ -4,13 +4,11 @@ import {
     get,
     head,
     filter,
-    toUpper,
     kebabCase,
     flatten,
     groupBy,
-    uniq,
-    difference,
-    includes
+    includes,
+    orderBy
 } from 'lodash'
 
 const { ROCK_MAPPINGS } = ApollosConfig;
@@ -85,9 +83,11 @@ export default class Breakout extends RockApolloDataSource {
         const DV_CATEGORY_ID = get(ApollosConfig, 'ROCK_MAPPINGS.BREAKOUTS.CATEGORIES', '')
         const DV_TIMES_ID = get(ApollosConfig, 'ROCK_MAPPINGS.BREAKOUTS.TIMES', '')
         const DV_SESSIONS_ID = get(ApollosConfig, 'ROCK_MAPPINGS.BREAKOUTS.SESSIONS', '')
+        const DV_SPX_ID = get(ApollosConfig, 'ROCK_MAPPINGS.BREAKOUTS.SPX', '')
 
         const categories = filter(inputCategories, category => category && category !== '')
         const times = filter(inputTimes, time => time && time !== '')
+        const isSPX = await this.context.dataSources.Auth.isSPX()
 
         const filterDefinedValues = await Promise.all([
             this.request('DefinedValues')
@@ -116,14 +116,26 @@ export default class Breakout extends RockApolloDataSource {
                     const categoryAttributeKey = "MinistryArea"
                     const args = `attributeKey=${categoryAttributeKey}&value=${guid}&caseSensitive=false`
 
-                    return this.request(`DefinedValues/GetByAttributeValue?${args}`)
+                    const sessionsRequest = this.request(`DefinedValues/GetByAttributeValue?${args}`)
                         .filter(`DefinedTypeId eq ${DV_SESSIONS_ID}`)
-                        .get()
+
+                    // Add SPX Defined Type Id to query if SPX user
+                    if (isSPX) {
+                        sessionsRequest.orFilter(`DefinedTypeId eq ${DV_SPX_ID}`)
+                    }
+
+                    return sessionsRequest.get()
                 })
             )
             sessions = flatten(sessionsByCategory)
         } else {
-            sessions = await this.request('DefinedValues').filter(`DefinedTypeId eq ${DV_SESSIONS_ID}`).get()
+            const sessionsRequest = this.request('DefinedValues').filter(`DefinedTypeId eq ${DV_SESSIONS_ID}`)
+
+            // Add SPX Defined Type Id to query if SPX user
+            if (isSPX) {
+                sessionsRequest.orFilter(`DefinedTypeId eq ${DV_SPX_ID}`)
+            }
+            sessions = await sessionsRequest.get()
         }
 
         if (times.length) {
@@ -142,10 +154,15 @@ export default class Breakout extends RockApolloDataSource {
             )
         }
 
-        return sessions
+        return orderBy(sessions, 'definedTypeId', 'desc')
     }
 
     forCurrentUser = async () => {
+        if (await this.context.dataSources.Auth.isSPX()) {
+            const DV_SPX_ID = get(ApollosConfig, 'ROCK_MAPPINGS.BREAKOUTS.SPX', '')
+            return this.request('DefinedValues').filter(`DefinedTypeId eq ${DV_SPX_ID}`).get()
+        }
+
         const { dataSources } = this.context
         const { id } = await dataSources.Auth.getCurrentPerson()
         // Get the active groups that the person is a member of.

@@ -13,4 +13,8 @@ export default gql`
       password: String!
     ): Authentication
   }
+
+  extend type Query {
+    passwordResetUrl: String
+  }
 `;

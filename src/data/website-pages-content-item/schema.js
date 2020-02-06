@@ -4,6 +4,7 @@ import { gql } from 'apollo-server';
 export default gql`
     extend type Query {
         getWebsitePageContentByTitle(website: String!, title: String!): WebsitePagesContentItem
+        mapUrl: String
     }
 
     type MetaTag {
