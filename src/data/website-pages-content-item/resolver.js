@@ -9,6 +9,7 @@ const resolver = {
     Query: {
         getWebsitePageContentByTitle: async (root, { website, title }, context) =>
             await context.dataSources.WebsitePagesContentItem.getWebsitePageContentByTitle(website, title),
+        mapUrl: () => "https://christfellowshipconference.com/map-mobile"
     },
     WebsitePagesContentItem: {
         ...ContentItem.resolver.ContentItem,

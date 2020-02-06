@@ -1,6 +1,6 @@
 import { createGlobalId } from '@apollosproject/server-core'
 import ApollosConfig from '@apollosproject/config'
-import { get, sortBy, split } from 'lodash'
+import { get, sortBy, split, filter as lodashFilter } from 'lodash'
 import sanitizeHtml from 'sanitize-html'
 
 import { resolver as definedValueResolver } from '../defined-value'
@@ -16,11 +16,17 @@ const resolver = {
         getBreakoutSessionsByCategory: (root, { category }, { dataSources }) =>
             dataSources.Breakout.getSessionsByCategory({ category }),
         breakoutFilters: async (root, { filter }, { dataSources }) => {
+            const isSpx = dataSources.Auth.isSPX()
             const { definedValues } = await dataSources.DefinedValueList.getByIdentifier(
                 get(ApollosConfig, `ROCK_MAPPINGS.BREAKOUTS.${filter}`, '')
             )
 
-            return sortBy(definedValues, 'order')
+            if (isSpx) {
+                return sortBy(definedValues, 'order')
+            }
+
+            // Filter out Senior Pastor Experience for non-SPX users
+            return lodashFilter(sortBy(definedValues, 'order'), n => n.id !== 984)
         },
         breakouts: async (root, { category, time }, { dataSources }) => {
             const sessions = await dataSources.Breakout.getByFilters({
@@ -28,7 +34,7 @@ const resolver = {
                 times: [time],
             })
 
-            return sessions.map(({ value, ...props }) => ({ title: value, ...props }))
+            return sessions
         },
         myBreakouts: async (root, args, { dataSources }) =>
             dataSources.Breakout.forCurrentUser(),
@@ -46,7 +52,9 @@ const resolver = {
             sanitizeHtml(description),
         tag: ({ tag }) => tag,
         parent: ({ parent }) => parent,
-        icon: async ({ attributeValues }, args, { dataSources }) => {
+        icon: async ({ attributeValues, icon }, args, { dataSources }) => {
+            if (!!icon && icon !== "") return icon
+
             const categoryGuid = get(attributeValues, 'ministryArea.value', '')
 
             if (categoryGuid !== '') {
@@ -56,7 +64,8 @@ const resolver = {
 
             return {}
         },
-        theme: async ({ attributeValues }, args, { dataSources }) => {
+        theme: async ({ attributeValues, theme }, args, { dataSources }) => {
+            if (theme) return theme
             const categoryGuid = get(attributeValues, 'ministryArea.value', '')
 
             if (categoryGuid !== '') {

@@ -109,6 +109,7 @@ ROCK_MAPPINGS:
     CATEGORIES: 86
     SESSIONS: 85
     TIMES: 84
+    SPX: 99
   
   DATAVIEW_CATEGORIES:
     # Id of the category used to store all persona dataviews

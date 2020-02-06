@@ -18,4 +18,6 @@ authResolver.Query.currentUser = (
   return dataSources.Auth.getCurrentPerson();
 };
 
+authResolver.Query.passwordResetUrl = () => "https://rock.christfellowshipconference.com/page/56"
+
 export default authResolver;
