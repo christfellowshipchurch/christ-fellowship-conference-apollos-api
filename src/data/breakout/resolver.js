@@ -15,19 +15,6 @@ const resolver = {
             dataSources.Breakout.getAllSessions(),
         getBreakoutSessionsByCategory: (root, { category }, { dataSources }) =>
             dataSources.Breakout.getSessionsByCategory({ category }),
-        breakoutFilters: async (root, { filter }, { dataSources }) => {
-            const isSpx = dataSources.Auth.isSPX()
-            const { definedValues } = await dataSources.DefinedValueList.getByIdentifier(
-                get(ApollosConfig, `ROCK_MAPPINGS.BREAKOUTS.${filter}`, '')
-            )
-
-            if (isSpx) {
-                return sortBy(definedValues, 'order')
-            }
-
-            // Filter out Senior Pastor Experience for non-SPX users
-            return lodashFilter(sortBy(definedValues, 'order'), n => n.id !== 984)
-        },
         breakouts: async (root, { category, time }, { dataSources }) => {
             const sessions = await dataSources.Breakout.getByFilters({
                 categories: [category],
@@ -36,8 +23,10 @@ const resolver = {
 
             return sessions
         },
-        myBreakouts: async (root, args, { dataSources }) =>
-            dataSources.Breakout.forCurrentUser(),
+        myBreakouts: async (root, args, { dataSources }, { cacheControl }) => {
+            cacheControl.setCacheHint({ maxAge: 0 })
+            return dataSources.Breakout.forCurrentUser()
+        },
         breakoutSignUpUrl: () => "https://rock.christfellowshipconference.com/2020breakouts"
     },
     Breakout: {
@@ -107,22 +96,6 @@ const resolver = {
         },
         location: () => ''
     },
-    BreakoutFilter: {
-        ...definedValueResolver.DefinedValue,
-        icon: async ({ attributeValues }) =>
-            get(attributeValues, 'icon.value', ''),
-        theme: async ({ attributeValues }, args, { dataSources }) => {
-            const defaultColor = '#0F4D81'
-            const primary = get(attributeValues, 'color.value', defaultColor)
-
-            return {
-                type: "LIGHT",
-                colors: {
-                    primary: primary !== "" ? primary : defaultColor
-                }
-            }
-        },
-    }
 }
 
 export default resolver

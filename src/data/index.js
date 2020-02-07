@@ -39,6 +39,7 @@ import * as DefinedValue from './defined-value';
 import * as DefinedValueList from './defined-value-list';
 
 import * as Breakout from './breakout';
+import * as BreakoutFilter from './breakout-filter';
 import * as ContentChannel from './content-channels';
 import * as Auth from './extended-auth';
 import * as AuthenticatedUser from './authenticated-user';
@@ -91,6 +92,7 @@ const data = {
 
   // Conference Specific
   Breakout,
+  BreakoutFilter,
 
   // Family,
   // UniversalContentItem: ContentItem, // alias

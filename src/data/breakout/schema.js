@@ -1,18 +1,12 @@
 import { gql } from 'apollo-server'
 
 export default gql`
-    enum BREAKOUT_FILTER {
-        TIMES,
-        CATEGORIES
-    }
-
     extend type Query {
         getBreakoutCategories: DefinedValueList
         getBreakoutSessions: [Breakout]
         getBreakoutSessionsByCategory(category: String!): [Breakout]
-        breakoutFilters(filter: BREAKOUT_FILTER!): [BreakoutFilter]
-        breakouts(category: String, time: String): [Breakout]
-        myBreakouts(category: String, time: String): [Breakout]
+        breakouts(category: String, time: String): [Breakout] @cacheControl(maxAge: 0)
+        myBreakouts (category: String, time: String): [Breakout] @cacheControl(maxAge: 0)
         breakoutSignUpUrl: String
     }
 
@@ -29,12 +23,5 @@ export default gql`
         times: [BreakoutFilter]
         summary: String
         location: String
-    }
-
-    type BreakoutFilter implements Node {
-        id: ID!
-        value: String
-        icon: String
-        theme: Theme
     }
 `
