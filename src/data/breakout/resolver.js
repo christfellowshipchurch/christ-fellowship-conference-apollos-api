@@ -94,7 +94,7 @@ const resolver = {
 
             return ''
         },
-        location: () => ''
+        location: ({ attributeValues }) => get(attributeValues, 'location.value', '')
     },
 }
 
