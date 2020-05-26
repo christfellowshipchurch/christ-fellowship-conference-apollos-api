@@ -28,6 +28,8 @@ export default class WebsitePagesContentItem extends ContentItem.dataSource {
 
         const contentChannelIdBySlug = await this.getContentChannelIdByTitle(title)
 
+        console.log({ contentChannelIdBySlug })
+
         // Get the Content Channels for the specified Website
         const websiteContentChannelId = get(
             ROCK_MAPPINGS,
