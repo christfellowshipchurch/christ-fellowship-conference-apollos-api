@@ -65,13 +65,13 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-    # - name: Conference ECS task definition
-    #   id: task-def-conference
-    #   uses: aws-actions/amazon-ecs-render-task-definition@v1
-    #   with:
-    #     task-definition: apollos_task_conference.json
-    #     container-name: conference-apollos
-    #     image: ${{ steps.build-image.outputs.image }}
+    - name: Conference ECS task definition
+      id: task-def-conference
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: apollos_task_conference.json
+        container-name: conference-apollos
+        image: ${{ steps.build-image.outputs.image }}
 
     # - name: Deploy Amazon ECS task definition
     #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
