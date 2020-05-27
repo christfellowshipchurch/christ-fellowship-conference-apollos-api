@@ -73,10 +73,10 @@ jobs:
         container-name: conference-apollos
         image: ${{ steps.build-image.outputs.image }}
 
-    # - name: Deploy Amazon ECS task definition
-    #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-    #   with:
-    #     task-definition: ${{ steps.task-def-prod.outputs.task-definition }}
-    #     service: conference-apollos
-    #     cluster: apollos
-    #     wait-for-service-stability: true
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def-prod.outputs.task-definition }}
+        service: conference-apollos
+        cluster: apollos
+        wait-for-service-stability: true
